@@ -17,7 +17,6 @@
 
     setContext("UserService", new UserService("http://localhost:4000"));
     setContext("VenueService", new VenueService("http://localhost:4000"));
-    let userDetails;
     let routes;
 
     routes = {

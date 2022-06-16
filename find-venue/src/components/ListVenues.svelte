@@ -53,8 +53,7 @@
                     {venue.creator.username}
                 {/if}
             </div>
-
-            {#if userDetails.id === venue.creator || userDetails.isadmin}
+            {#if  venue.creator?._id === userDetails.id || userDetails.isadmin}
                 <div class="column">
                     <a href="/#/venues/edit?id={venue._id}">
                         <button class="button is-pulled-right">

@@ -1,6 +1,8 @@
 <script>
     import {push} from "svelte-spa-router";
     import {getContext, onMount} from "svelte";
+    import {parseJwt} from "../utils/UserUtils.js";
+    import {user} from "../stores.js";
 
     const venueService = getContext("VenueService");
     let title;
@@ -15,8 +17,10 @@
     });
 
     async function addVenue() {
+        let userDetails = parseJwt($user.token);
+        let creator = userDetails.id;
 
-        let success = await venueService.createVenue(title, description, latitude, longitude, selectedCategories);
+        let success = await venueService.createVenue(title, description, latitude, longitude, creator, selectedCategories);
         if (success) {
             await push("/dashboard");
         } else {

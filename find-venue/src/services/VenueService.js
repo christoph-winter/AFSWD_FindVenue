@@ -23,13 +23,14 @@ export class VenueService {
         }
     }
 
-    async createVenue(title, description, lat, long, categories) {
+    async createVenue(title, description, lat, long, creator, categories) {
         try {
             let newVenue = {
                 title: title,
                 description: description,
                 latitude: lat,
                 longitude: long,
+                creator: creator,
                 categories: categories,
             }
             const res = await axios.post(`${this.baseUrl}/rest-api/poi`, newVenue);

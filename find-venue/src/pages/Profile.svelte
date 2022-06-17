@@ -37,7 +37,7 @@
     }
 
 </script>
-<div>
+<div class="box">
 
     {#if loggedInUser}
         <form on:submit|preventDefault={changeUser}>

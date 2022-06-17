@@ -46,10 +46,10 @@
                         </a>
 
                         <div class="navbar-dropdown">
-                            <a class="navbar-item" href="/#/admin/dashboard">
+                            <a class="navbar-item" href="/#/admin/settings">
                                 Settings
                             </a>
-                            <a class="navbar-item" href="/#/admin/settings">
+                            <a class="navbar-item" href="/#/admin/analytics">
                                 Analytics
                             </a>
                         </div>

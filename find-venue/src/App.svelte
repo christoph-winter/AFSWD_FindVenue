@@ -14,6 +14,7 @@
     import AdminDashboard from "./pages/AdminSettings.svelte";
     import ChangeName from "./components/ChangeName.svelte";
     import ChangePassword from "./components/ChangePassword.svelte";
+    import MapOverview from "./pages/MapOverview.svelte";
 
     setContext("UserService", new UserService("http://localhost:4000"));
     setContext("VenueService", new VenueService("http://localhost:4000"));
@@ -31,6 +32,7 @@
         "/profile/changepassword": ChangePassword,
         "/venues/edit*": EditPOI,
         "/admin/dashboard": AdminDashboard,
+        "/map": MapOverview,
     }
 
 </script>

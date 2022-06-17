@@ -10,15 +10,14 @@
         venues = await venueService.getVenues();
         if ($user.token) userDetails = parseJwt($user.token);
     });
-
+    async function moveTo(){
+        // TODO: move on Map
+    }
+    // TODO: when adding POI refresh map
 </script>
-<div class="box box-link-hover-shadow">
-    <a class="button is-danger" href="/#/venues/addvenue">
-        Add New Venue
-    </a>
-</div>
+<div style="height: 800px; overflow-y: scroll; overflow-x:hidden;">
 {#each venues as venue}
-    <div class="box box-link-hover-shadow">
+    <div class="box box-link-hover-shadow" on:click={moveTo}>
         <h2 class="title" style="color:rgb(201, 6, 6)">
             {venue.title}
         </h2>
@@ -27,6 +26,20 @@
                 <strong>[{category.title}] </strong>
             {/each}
         </h3>
+        {#if venue.images}
+        <div class="columns">
+            <div class="level">
+            {#each venue.images as image}
+
+                    <figure class="image is-128x128 mr-1">
+                        <img  src="{image.src}" style="width: 128px; height: 128px;">
+                    </figure>
+
+                {/each}
+            </div>
+        </div>
+        {/if}
+
         <div class="columns">
             <div class="column">
                 <p class="title is-6">Description:</p>
@@ -69,3 +82,4 @@
 
 
 {/each}
+</div>

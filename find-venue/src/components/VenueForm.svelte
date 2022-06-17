@@ -1,6 +1,6 @@
 <script>
     import {push} from "svelte-spa-router";
-    import {getContext, onMount} from "svelte";
+    import {createEventDispatcher, getContext, onMount} from "svelte";
     import {parseJwt} from "../utils/UserUtils.js";
     import {user} from "../stores.js";
 
@@ -15,13 +15,23 @@
     onMount(async () => {
         categories = await venueService.getCategories();
     });
-
+    const dispatch = createEventDispatcher();
     async function addVenue() {
         let userDetails = parseJwt($user.token);
         let creator = userDetails.id;
-
+        let newVenue = {
+            title: title,
+            description: description,
+            latitude: latitude,
+            longitude: longitude,
+            creator: creator,
+            categories: selectedCategories,
+        }
         let success = await venueService.createVenue(title, description, latitude, longitude, creator, selectedCategories);
         if (success) {
+            dispatch("message",{
+                venue: newVenue,
+            })
             await push("/dashboard");
         } else {
             title = "";
@@ -31,6 +41,7 @@
             selectedCategories = [];
             errorMessage = "Invalid Credentials";
         }
+
     }
 </script>
 <form on:submit|preventDefault={addVenue}>

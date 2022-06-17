@@ -25,7 +25,6 @@
     let username;
     let email;
     let password;
-    let errorMessage;
 
     async function changeUser() {
         userService.changeUser({
@@ -49,7 +48,7 @@
                         <p>{loggedInUser.firstname}</p>
                     </div>
                     <div class="field">
-                        <label class="label">Last Name </label>
+                        <label class="label">Last Name:</label>
                         <p>{loggedInUser.lastname}</p>
                     </div>
                 </div>

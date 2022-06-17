@@ -35,6 +35,9 @@
             <a class="navbar-item" href="/#/dashboard">
                 Venues
             </a>
+            <a class="navbar-item" href="/#/map">
+                Map
+            </a>
             {#if userDetails}
                 {#if userDetails.isadmin}
                     <div class="navbar-item has-dropdown is-hoverable">

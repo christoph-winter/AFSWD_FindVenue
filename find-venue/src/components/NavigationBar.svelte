@@ -35,18 +35,21 @@
             <a class="navbar-item" href="/#/dashboard">
                 Venues
             </a>
+            <a class="navbar-item" href="/#/map">
+                Map
+            </a>
             {#if userDetails}
                 {#if userDetails.isadmin}
                     <div class="navbar-item has-dropdown is-hoverable">
-                        <a class="navbar-link" href="/#/admin/dashboard">
+                        <a class="navbar-link" href="/#/admin/settings">
                             Admin
                         </a>
 
                         <div class="navbar-dropdown">
-                            <a class="navbar-item" href="/#/admin/dashboard">
+                            <a class="navbar-item" href="/#/admin/settings">
                                 Settings
                             </a>
-                            <a class="navbar-item" href="/#/admin/settings">
+                            <a class="navbar-item" href="/#/admin/analytics">
                                 Analytics
                             </a>
                         </div>

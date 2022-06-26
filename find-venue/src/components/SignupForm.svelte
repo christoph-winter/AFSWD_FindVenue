@@ -14,7 +14,7 @@
     async function signup() {
         let success = await userService.signup(firstname, lastname, email, username, password)
         if (success) {
-            push("/");
+            push("/login");
         } else {
             errorMessage = "Error Trying to sign up";
         }

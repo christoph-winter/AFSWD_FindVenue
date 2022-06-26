@@ -1,24 +1,24 @@
 <script>
     import {getContext, onMount} from 'svelte'
+    import {users} from "../stores.js";
 
     const userService = getContext("UserService");
-    let users = [];
     onMount(async () => {
 
-        users = await userService.getAllUsers();
+        users.set(await userService.getAllUsers());
     });
 
     async function deleteUser(userId) {
         await userService.deleteUser(userId);
-        users = await userService.getAllUsers();
+        $users = await userService.getAllUsers();
     }
 
     async function setAdmin(userId) {
-        if (await userService.setAdmin(userId)) ;
-        users = await userService.getAllUsers();
+        if(await userService.setAdmin(userId))
+            users.set(await userService.getAllUsers());
     }
 </script>
-{#each users as user}
+{#each $users as user}
     <div class="box box-link-hover-shadow">
         <h4 class="title">
             {user.firstname} {user.lastname}

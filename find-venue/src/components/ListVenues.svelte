@@ -1,24 +1,22 @@
 <script>
     import {getContext, onMount} from 'svelte'
-    import {user} from "../stores.js";
+    import {categories, currentLocation, user, venues} from "../stores.js";
     import {parseJwt} from "../utils/UserUtils.js";
 
     const venueService = getContext("VenueService");
-    let venues = [];
     let userDetails = {};
     onMount(async () => {
-        venues = await venueService.getVenues();
+        venues.set(await venueService.getVenues());
         if ($user.token) userDetails = parseJwt($user.token);
     });
-
+    async function moveTo(venue){
+        currentLocation.set({lat: venue.latitude, long: venue.longitude})
+    }
+    // TODO: when adding POI refresh map
 </script>
-<div class="box box-link-hover-shadow">
-    <a class="button is-danger" href="/#/venues/addvenue">
-        Add New Venue
-    </a>
-</div>
-{#each venues as venue}
-    <div class="box box-link-hover-shadow">
+<div style="height: 800px; overflow-y: scroll; overflow-x:hidden;">
+{#each $venues as venue}
+    <div class="box box-link-hover-shadow" on:click={()=>moveTo(venue)} style="cursor: pointer;">
         <h2 class="title" style="color:rgb(201, 6, 6)">
             {venue.title}
         </h2>
@@ -27,6 +25,20 @@
                 <strong>[{category.title}] </strong>
             {/each}
         </h3>
+        {#if venue.images}
+        <div class="columns">
+            <div class="level">
+            {#each venue.images as image}
+
+                    <figure class="image is-128x128 mr-1">
+                        <img  src="{image.src}" style="width: 128px; height: 128px;">
+                    </figure>
+
+                {/each}
+            </div>
+        </div>
+        {/if}
+
         <div class="columns">
             <div class="column">
                 <p class="title is-6">Description:</p>
@@ -53,8 +65,7 @@
                     {venue.creator.username}
                 {/if}
             </div>
-
-            {#if userDetails.id === venue.creator || userDetails.isadmin}
+            {#if  venue.creator?._id === userDetails.id || userDetails.isadmin}
                 <div class="column">
                     <a href="/#/venues/edit?id={venue._id}">
                         <button class="button is-pulled-right">
@@ -70,3 +81,4 @@
 
 
 {/each}
+</div>

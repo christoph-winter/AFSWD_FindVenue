@@ -1,23 +1,22 @@
 <script>
     import {getContext, onMount} from 'svelte'
-    import {user} from "../stores.js";
+    import {categories, currentLocation, user, venues} from "../stores.js";
     import {parseJwt} from "../utils/UserUtils.js";
 
     const venueService = getContext("VenueService");
-    let venues = [];
     let userDetails = {};
     onMount(async () => {
-        venues = await venueService.getVenues();
+        venues.set(await venueService.getVenues());
         if ($user.token) userDetails = parseJwt($user.token);
     });
-    async function moveTo(){
-        // TODO: move on Map
+    async function moveTo(venue){
+        currentLocation.set({lat: venue.latitude, long: venue.longitude})
     }
     // TODO: when adding POI refresh map
 </script>
 <div style="height: 800px; overflow-y: scroll; overflow-x:hidden;">
-{#each venues as venue}
-    <div class="box box-link-hover-shadow" on:click={moveTo}>
+{#each $venues as venue}
+    <div class="box box-link-hover-shadow" on:click={()=>moveTo(venue)} style="cursor: pointer;">
         <h2 class="title" style="color:rgb(201, 6, 6)">
             {venue.title}
         </h2>

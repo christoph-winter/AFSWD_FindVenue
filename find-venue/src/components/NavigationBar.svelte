@@ -41,7 +41,7 @@
             {#if userDetails}
                 {#if userDetails.isadmin}
                     <div class="navbar-item has-dropdown is-hoverable">
-                        <a class="navbar-link" href="/#/admin/dashboard">
+                        <a class="navbar-link" href="/#/admin/settings">
                             Admin
                         </a>
 

@@ -43,6 +43,7 @@ export class LeafletMap {
     }
 
     showLayerControl() {
+        if(Object.keys(this.control).length !== 0) this.control.remove(this.imap);
         this.control = L.control.layers(this.baseLayers, this.overlays).addTo(this.imap);
     }
 
@@ -62,12 +63,11 @@ export class LeafletMap {
     zoomTo(location) {
         this.imap.setView(new L.LatLng(location.lat, location.lng), 8);
     }
-
-    addMarker(location, popupText = "", layers = ["default"]) {
+    addMarker(location, popupText = "", layers = ["default"], onClickAction = (() =>{})) {
         let group = {};
         let marker = L.marker([location.lat, location.lng]);
         if (popupText) {
-            var popup = L.popup({autoClose: false, closeOnClick: false});
+            var popup = L.popup({autoClose: true, closeOnClick: true, closeButton: false});
             popup.setContent(popupText);
             marker.bindPopup(popup);
         }
@@ -80,6 +80,7 @@ export class LeafletMap {
             group = this.overlays[layerTitle];
         }
             marker.addTo(group);
+            marker.on("click", onClickAction);
         });
 
     }

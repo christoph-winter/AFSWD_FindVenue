@@ -12,14 +12,14 @@
 
 </script>
 <div class="box">
-<div class="columns">
-    <div class="column">
-        <EditVenueForm {venueId}/>
+    <div class="columns">
+        <div class="column">
+            <EditVenueForm {venueId}/>
+        </div>
+        <!--
+            <div class = "column">
+                <VenueImages {venueId}/>
+            </div>
+        -->
     </div>
-<!--
-    <div class = "column">
-        <VenueImages {venueId}/>
-    </div>
--->
-</div>
 </div>

@@ -10,14 +10,14 @@
             await replace("/login")
     });
 </script>
-    <div class="box box-link-hover-shadow">
-        <a class="button is-danger" href="/#/venues/addvenue">
-            Add New Venue
-        </a>
-    </div>
+<div class="box box-link-hover-shadow">
+    <a class="button is-danger" href="/#/venues/addvenue">
+        Add New Venue
+    </a>
+</div>
 <div class="columns">
     <div class="column">
-    <ListVenues/>
+        <ListVenues/>
     </div>
     <div class="column">
         <VenueMap id="dashboard-map"/>

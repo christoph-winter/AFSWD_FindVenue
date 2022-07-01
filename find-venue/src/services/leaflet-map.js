@@ -1,4 +1,5 @@
 import * as L from "leaflet";
+
 export class LeafletMap {
     imap = {};
     control = {};
@@ -43,7 +44,7 @@ export class LeafletMap {
     }
 
     showLayerControl() {
-        if(Object.keys(this.control).length !== 0) this.control.remove(this.imap);
+        if (Object.keys(this.control).length !== 0) this.control.remove(this.imap);
         this.control = L.control.layers(this.baseLayers, this.overlays).addTo(this.imap);
     }
 
@@ -63,7 +64,9 @@ export class LeafletMap {
     zoomTo(location) {
         this.imap.setView(new L.LatLng(location.lat, location.lng), 8);
     }
-    addMarker(location, popupText = "", layers = ["default"], onClickAction = (() =>{})) {
+
+    addMarker(location, popupText = "", layers = ["default"], onClickAction = (() => {
+    })) {
         let group = {};
         let marker = L.marker([location.lat, location.lng]);
         if (popupText) {
@@ -72,13 +75,13 @@ export class LeafletMap {
             marker.bindPopup(popup);
         }
         layers.forEach(layerTitle => {
-        if (!this.overlays[layerTitle]) {
-            group = L.layerGroup([]);
-            this.overlays[layerTitle] = group;
-            this.imap.addLayer(group);
-        } else {
-            group = this.overlays[layerTitle];
-        }
+            if (!this.overlays[layerTitle]) {
+                group = L.layerGroup([]);
+                this.overlays[layerTitle] = group;
+                this.imap.addLayer(group);
+            } else {
+                group = this.overlays[layerTitle];
+            }
             marker.addTo(group);
             marker.on("click", onClickAction);
         });

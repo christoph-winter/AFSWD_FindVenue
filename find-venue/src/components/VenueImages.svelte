@@ -10,7 +10,7 @@
         venue = await venueService.getVenue(venueId);
     });
 
-    async function uploadImage(){
+    async function uploadImage() {
 
     }
 </script>

@@ -36,21 +36,21 @@
         }
     }
 
-    $: if(map) {
-            $venues.forEach(venue => {
-                addVenueMarker(venue);
-            });
+    $: if (map) {
+        $venues.forEach(venue => {
+            addVenueMarker(venue);
+        });
 
-            function addVenueMarker(venue) {
-                map.addMarker({lat: venue.latitude, lng: venue.longitude}, `<strong>${venue.title}</strong>`,
-                    venue.categories.map(function (item) {
-                        return item["title"];
-                    }), () => {
-                        currentLocation.set({lat: venue.latitude, long: venue.longitude})
-                    });
-            }
+        function addVenueMarker(venue) {
+            map.addMarker({lat: venue.latitude, lng: venue.longitude}, `<strong>${venue.title}</strong>`,
+                venue.categories.map(function (item) {
+                    return item["title"];
+                }), () => {
+                    currentLocation.set({lat: venue.latitude, long: venue.longitude})
+                });
+        }
 
-            if(hasLayerControl) map.showLayerControl();
+        if (hasLayerControl) map.showLayerControl();
     }
 
 </script>

@@ -15,6 +15,7 @@
     onMount(async () => {
         categories = await venueService.getCategories();
     });
+
     async function addVenue() {
         let userDetails = parseJwt($user.token);
         let creator = userDetails.id;

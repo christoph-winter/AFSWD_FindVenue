@@ -14,7 +14,7 @@
     }
 
     async function setAdmin(userId) {
-        if(await userService.setAdmin(userId))
+        if (await userService.setAdmin(userId))
             users.set(await userService.getAllUsers());
     }
 </script>

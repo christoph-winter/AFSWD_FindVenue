@@ -9,76 +9,78 @@
         venues.set(await venueService.getVenues());
         if ($user.token) userDetails = parseJwt($user.token);
     });
-    async function moveTo(venue){
+
+    async function moveTo(venue) {
         currentLocation.set({lat: venue.latitude, long: venue.longitude})
     }
+
     // TODO: when adding POI refresh map
 </script>
 <div style="height: 800px; overflow-y: scroll; overflow-x:hidden;">
-{#each $venues as venue}
-    <div class="box box-link-hover-shadow" on:click={()=>moveTo(venue)} style="cursor: pointer;">
-        <h2 class="title" style="color:rgb(201, 6, 6)">
-            {venue.title}
-        </h2>
-        <h3 class="subtitle heading">
-            {#each venue.categories as category}
-                <strong>[{category.title}] </strong>
-            {/each}
-        </h3>
-        {#if venue.images}
-        <div class="columns">
-            <div class="level">
-            {#each venue.images as image}
-
-                    <figure class="image is-128x128 mr-1">
-                        <img  src="{image.src}" style="width: 128px; height: 128px;">
-                    </figure>
-
+    {#each $venues as venue}
+        <div class="box box-link-hover-shadow" on:click={()=>moveTo(venue)} style="cursor: pointer;">
+            <h2 class="title" style="color:rgb(201, 6, 6)">
+                {venue.title}
+            </h2>
+            <h3 class="subtitle heading">
+                {#each venue.categories as category}
+                    <strong>[{category.title}] </strong>
                 {/each}
-            </div>
-        </div>
-        {/if}
+            </h3>
+            {#if venue.images}
+                <div class="columns">
+                    <div class="level">
+                        {#each venue.images as image}
 
-        <div class="columns">
-            <div class="column">
-                <p class="title is-6">Description:</p>
+                            <figure class="image is-128x128 mr-1">
+                                <img src="{image.src}" style="width: 128px; height: 128px;">
+                            </figure>
 
-                {venue.description}
+                        {/each}
+                    </div>
+                </div>
+            {/if}
 
-            </div>
-        </div>
-        <div class="columns mt-2">
-            <div class="column">
-                <p class="title is-6">Latitude:</p>
-                {venue.latitude}
-            </div>
-            <div class="column">
-                <p class="title is-6">Longitude:</p>
-                {venue.longitude}
-            </div>
-        </div>
-        <div class="columns">
-            <div class="column">
-                {#if venue.creator}
-                    <p class="title is-6">Author:</p>
-
-                    {venue.creator.username}
-                {/if}
-            </div>
-            {#if  venue.creator?._id === userDetails.id || userDetails.isadmin}
+            <div class="columns">
                 <div class="column">
-                    <a href="/#/venues/edit?id={venue._id}">
-                        <button class="button is-pulled-right">
+                    <p class="title is-6">Description:</p>
+
+                    {venue.description}
+
+                </div>
+            </div>
+            <div class="columns mt-2">
+                <div class="column">
+                    <p class="title is-6">Latitude:</p>
+                    {venue.latitude}
+                </div>
+                <div class="column">
+                    <p class="title is-6">Longitude:</p>
+                    {venue.longitude}
+                </div>
+            </div>
+            <div class="columns">
+                <div class="column">
+                    {#if venue.creator}
+                        <p class="title is-6">Author:</p>
+
+                        {venue.creator.username}
+                    {/if}
+                </div>
+                {#if venue.creator?._id === userDetails.id || userDetails.isadmin}
+                    <div class="column">
+                        <a href="/#/venues/edit?id={venue._id}">
+                            <button class="button is-pulled-right">
                     <span class="icon is-small">
                         <i class="fa-solid fa-pen"></i>
                     </span>
-                        </button>
-                    </a>
-                </div>
-            {/if}
+                            </button>
+                        </a>
+                    </div>
+                {/if}
+            </div>
         </div>
-    </div>
 
 
-{/each}
+    {/each}
 </div>

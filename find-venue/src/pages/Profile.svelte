@@ -57,11 +57,11 @@
             </div>
             <a href="/#/profile/changename" class="button is-info">ChangeName</a>
             <div class="field mt-6">
-                <label class="label">Email:</label>
+                <p class="label">Email:</p>
                 <p>{loggedInUser.email}</p>
             </div>
             <div class="field mt-6">
-                <label class="label">Username:</label>
+                <p class="label">Username:</p>
                 <p>{loggedInUser.username}</p>
             </div>
 

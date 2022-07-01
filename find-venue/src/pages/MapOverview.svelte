@@ -28,9 +28,9 @@
                     <VenueMap id="map-zoom" zoom="{16}" height="480" activeLayer="Satellite" hasLayerControl="{false}"/>
                 </div>
             </div>
-                <div class="tile is-child">
-                    <VenueMap id="map-secondary" zoom="{12}" height="300" activeLayer="Terrain" hasLayerControl="{false}"/>
-                </div>
+            <div class="tile is-child">
+                <VenueMap id="map-secondary" zoom="{12}" height="300" activeLayer="Terrain" hasLayerControl="{false}"/>
             </div>
+        </div>
     </div>
 </div>

@@ -2,19 +2,20 @@
     import Chart from "svelte-frappe-charts"
     import {getContext, onMount} from "svelte";
     import {categories, users, venues} from "../stores.js";
+
     const userService = getContext("UserService");
     const venueService = getContext("VenueService");
     let selectedUser;
-    let creators=[];
-    let categoryCount=[];
-    onMount( async ()=>{
+    let creators = [];
+    let categoryCount = [];
+    onMount(async () => {
         users.set(await userService.getAllUsers());
         categories.set(await venueService.getCategories());
         venues.set(await venueService.getVenues());
 
     });
     $: {
-        if($users.length !== 0 && $categories.length !== 0 && $venues.length !== 0) {
+        if ($users.length !== 0 && $categories.length !== 0 && $venues.length !== 0) {
             categoryCount = $categories.map(function (item) {
                 return {title: item["title"], count: 0, userCount: 0,}
             });
@@ -42,7 +43,7 @@
     let categoryData;
     let contributionUserToCategoryData;
     $:{
-        if(creators && creators.length !== 0 && $users.length !== 0) {
+        if (creators && creators.length !== 0 && $users.length !== 0) {
             let usersCount = $users.length;
             let contributingUsers = creators.length;
 
@@ -56,7 +57,7 @@
             };
         }
 
-        if(categoryCount.length !== 0) {
+        if (categoryCount.length !== 0) {
 
             categoryData = {
                 labels: categoryCount.map(function (item) {
@@ -87,27 +88,27 @@
     }
 </script>
 <div class="box">
-<div class="columns">
-    <div class="column has-text-centered">
-        <h1 class="title is-4">Contributing Users</h1>
-        <Chart data={contributionData} type="pie"/>
+    <div class="columns">
+        <div class="column has-text-centered">
+            <h1 class="title is-4">Contributing Users</h1>
+            <Chart data={contributionData} type="donut"/>
+        </div>
+        <div class="column has-text-centered">
+            <h1 class="title is-4">Number of Venues Categories</h1>
+            <Chart data={categoryData} type="bar"/>
+        </div>
     </div>
-    <div class="column has-text-centered">
-        <h1 class="title is-4">Number of Venues Categories</h1>
-        <Chart data={categoryData} type="bar"/>
-    </div>
-</div>
     <h1 class="title is-4">User Contribution to Category</h1>
     <div class="columns">
 
         <div class="column is-one-fifth">
-        <div class="select is-link">
-            <select bind:value={selectedUser}>
-                {#each $users as user}
-                    <option value="{user._id}">{user.username}</option>
-                {/each}
-            </select>
-        </div>
+            <div class="select is-link">
+                <select bind:value={selectedUser}>
+                    {#each $users as user}
+                        <option value="{user._id}">{user.username}</option>
+                    {/each}
+                </select>
+            </div>
         </div>
         <div class="column">
             <div class="column">
